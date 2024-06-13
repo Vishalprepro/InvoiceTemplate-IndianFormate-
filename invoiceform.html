@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tax Invoice Form</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+        }
+
+        #contact-form {
+            max-width: 400px;
+            margin: 20px auto;
+            background-color: #fff;
+            padding: 20px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        input {
+            width: 100%;
+            padding: 8px;
+            margin-bottom: 10px;
+        }
+
+        button {
+            padding: 10px;
+            background-color: #4caf50;
+            color: #fff;
+            border: none;
+            cursor: pointer;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div id="contact-form">
+        <h2>TAX INVOICE</h2>
+    
+        <form class="w-50 mx-auto mt-5 mb-5 from1">
+            <label for="name">Billing To Name:</label>
+            <input type="text" class="form-control" id="name" placeholder="">
+
+
+            <label for="address">Address:</label>
+            <input type="text" class="form-control" id="address" placeholder="Enter your address">
+
+            <label for="GSTIN/UIN">GSTIN/UIN Billing company:</label>
+            <input type="text" class="form-control" id="GSTIN" placeholder="">
+            <label for="statename">BuyerState:</label>
+            <input type="text" id="statename" name="statename" class="form-control" placeholder="">
+            <label for="statecode">BuyerStateCode:</label>
+            <input type="text" id="statecode" name="statecode" class="form-control" placeholder="">
+
+            <label for="phone">Phone Number:</label>
+            <input type="tel" class="form-control" id="phone" placeholder="Enter your phone number">
+            <label for="invoiceNo">Invoice No. e-Way Bill No.</label>
+            <input type="text" id="invoiceNo" class="form-control" name="invoiceNo" placeholder="">
+            <label for="todaysDate">Dated</label>
+            <input type="date" id="todaysDate" class="form-control" name="todaysDate" placeholder="">
+            <label for="paymentMode">Mode/Terms of Payment</label>
+            <input type="text" id="paymentMode" class="form-control" name="paymentMode" placeholder="">
+            <label for="referenceNo">Reference No. & Date</label>
+            <input type="text" id="referenceNo" class="form-control" name="referenceNo" placeholder="">
+            <label for="otherReferences">Other References</label>
+            <input type="text" id="otherReferences" class="form-control" name="otherReferences" placeholder="">
+            <label for="orderNo">Buyer's Order No.</label>
+            <input type="text" id="orderNo" name="orderNo" class="form-control" placeholder="">
+            <label for="onDate">Dated</label>
+            <input type="date" id="onDate" name="onDate" class="form-control" placeholder="">
+            <label for="dispatchDocNo">Dispatch Doc No.</label>
+            <input type="text" id="dispatchDocNo" name="dispatchDocNo" class="form-control" placeholder="">
+            <label for="deliveryNoteDate">Delivery Note Date</label>
+            <input type="date" id="deliveryNoteDate" name="deliveryNoteDate" class="form-control" placehholder="">
+            <label for="dispatchThrough">Dispatch through</label>
+            <input type="text" id="dispatchThrough" name="dispatchThrough" class="form-control" placeholder="">
+            <label for="billOfLading">Bill of Lading/LR-RR No.</label>
+            <input type="text" id="billOfLading" name="billOfLading" class="form-control" placeholder="">
+            <label for="motorVehicleNo">Motor Vehicle No.</label>
+            <input type="text" id="motorVehicleNo" name="motorVehicleNo" class="form-control" placeholder="">
+            <label for="terms">Motor Vehicle No.</label>
+            <input type="text" id="terms" name="terms" class="form-control" placeholder="">
+
+
+            <div id="productRowsContainer"></div>
+
+            <button type="button" class="btn btn-warning m-2" onclick="addProduct()">Add Product</button>
+            <button type="button" class="btn btn-primary m-2" onclick="submitForm()">Submit</button>
+        </form>
+
+        <script>
+            let productCounter = 1;
+            let serialNumber = 1;
+
+            async function loadAndLookupJSON(fileName, query, isDescription) {
+                try {
+                    const response = await fetch(fileName);
+                    if (!response.ok) {
+                        throw new Error('Failed to load JSON file');
+                    }
+                    const data = await response.json();
+                    return lookupHSN(data, query, isDescription);
+                } catch (error) {
+                    console.error('Error:', error);
+                }
+            }
+
+            function lookupHSN(data, query, isDescription) {
+                if (isDescription) {
+                    const mapping = data.find(item => item.HSNDescription === query);
+                    return mapping ? mapping.HSNCode : "Not found";
+                } else {
+                    const mapping = data.find(item => item.HSNCode === query);
+                    return mapping ? mapping.HSNDescription : "Not found";
+                }
+            }
+
+            function addProduct() {
+                const productRowsContainer = document.getElementById('productRowsContainer');
+
+                const newRow = document.createElement('div');
+                newRow.className = 'form-group';
+
+                newRow.innerHTML = `
+                    <label>Serial No: ${serialNumber++}</label>
+                    <label for="hsnDesc${productCounter}">HSN Description</label>
+                    <input type="text" class="form-control" id="hsnDesc${productCounter}" onchange="getHSN(${productCounter}, true)" />
+                    <label for="hsnCode${productCounter}">HSN Code</label>
+                    <input type="text" class="form-control" id="hsnCode${productCounter}" onchange="getHSN(${productCounter}, false)" />
+                    <label for="gst-${productCounter}">GST Rate: </label>
+                    <input type="text" id="gst-${productCounter}" name="gst-${productCounter}">
+                    <label for="quantity-${productCounter}">Quantity: </label>
+                    <input type="text" id="quantity-${productCounter}" name="quantity-${productCounter}">
+                    <label for="rate-${productCounter}">Rate: </label>
+                    <input type="text" id="rate-${productCounter}" name="rate-${productCounter}">
+                    <label for="per-${productCounter}">Per: </label>
+                    <input type="text" id="per-${productCounter}" name="per-${productCounter}">
+                    <label for="disc-${productCounter}">Disc%: </label>
+                    <input type="text" id="disc-${productCounter}" name="disc-${productCounter}">
+                `;
+
+                productRowsContainer.appendChild(newRow);
+                productCounter++;
+            }
+
+            async function getHSN(counter, isDescription) {
+                const query = isDescription ? document.getElementById(`hsnDesc${counter}`).value : document.getElementById(`hsnCode${counter}`).value;
+                if (query.trim() === '') return;
+
+                const result = await loadAndLookupJSON('excel2json-1715100943039.json', query, isDescription);
+                if (isDescription) {
+                    document.getElementById(`hsnCode${counter}`).value = result;
+                } else {
+                    document.getElementById(`hsnDesc${counter}`).value = result;
+                }
+            }
+
+            function submitForm() {
+                const products = [];
+
+                for (let i = 1; i < productCounter; i++) {
+                    const product = {
+                        serialNumber: i,
+                        description: document.getElementById(`hsnDesc${i}`).value,
+                        hsn: document.getElementById(`hsnCode${i}`).value,
+                        gstRate: document.getElementById(`gst-${i}`).value,
+                        quantity: document.getElementById(`quantity-${i}`).value,
+                        rate: document.getElementById(`rate-${i}`).value,
+                        per: document.getElementById(`per-${i}`).value,
+                        disc: document.getElementById(`disc-${i}`).value
+
+                    };
+
+                    products.push(product);
+                }
+
+                const formData = {
+                    name: document.getElementById('name').value,
+                    address: document.getElementById('address').value,
+                    GSTIN: document.getElementById('GSTIN').value,
+                    phone: document.getElementById('phone').value,
+                    statename:document.getElementById('statename').value,
+                    statecode:document.getElementById('statecode').value,
+                    invoiceNo: document.getElementById('invoiceNo').value,
+                    todaysDate: document.getElementById('todaysDate').value,
+                    paymentMode: document.getElementById('paymentMode').value,
+                    referenceNo: document.getElementById('referenceNo').value,
+                    otherReferences: document.getElementById('otherReferences').value,
+                    orderNo: document.getElementById('orderNo').value,
+                    onDate: document.getElementById('onDate').value,
+                    dispatchDocNo: document.getElementById('dispatchDocNo').value,
+                    deliveryNoteDate: document.getElementById('deliveryNoteDate').value,
+                    dispatchThrough: document.getElementById('dispatchThrough').value,
+                    billOfLading: document.getElementById('billOfLading').value,
+                    motorVehicleNo: document.getElementById('motorVehicleNo').value,
+                    terms: document.getElementById('terms').value,
+                    products
+                };
+
+
+
+                window.location.href = `radio.html?data=${encodeURIComponent(JSON.stringify(formData))}`;
+            }//displaying.html
+        </script>
