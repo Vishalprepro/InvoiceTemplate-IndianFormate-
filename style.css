@@ -1,0 +1,274 @@
+ body {
+     font-family: 'Times New Roman', Times, serif;
+     margin: 0;
+     /*border: 1px solid #000;*/
+     display: flex;
+     justify-content: center;
+     align-items: flex-start;
+     height: 100vh;
+     box-sizing: border-box;
+    font-size: 16pt;
+
+ }
+  #content {
+
+      width: 450mm;
+      height: auto !important;
+      background-color: #fff;
+      border: 1px solid #000;
+      box-sizing: 0 2px 4px rgba(0, 0, 0, 0.1);
+    font-size: 18pt;
+  }
+
+ #invoicecontent {
+    font-family: Arial, sans-serif;
+        font-size: 50pt;
+        padding: 20px;
+        border-radius: 5px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        text-align: center;
+ }
+
+
+ .kpp td {
+     border: 1px solid black;
+     padding: 10px;
+     text-align: left;
+     background: none;
+     background-color: none;
+
+ }
+
+ .table-container,
+ .table-wrapper {
+     display: flex;
+     flex-wrap: wrap;
+     justify-content: center;
+     border-collapse: collapse;
+ }
+
+ table {
+     border-collapse: collapse;
+     margin: 0;
+ }
+
+ th,
+ td {
+     border: 1px solid #000;
+     padding: 1px;
+     background: none;
+ }
+
+ .table-container>table:first-child,
+ .table-wrapper>table:first-child {
+     border-right: 0;
+     justify-content: center;
+ }
+
+ .table-container>table:last-child,
+ .table-wrapper>table:last-child {
+     border-left: 0;
+     justify-content: center;
+ }
+
+ table.kpp2 {
+     width:50%;
+     background-color: none;
+     margin: 0px 0px 0px 0px;
+     justify-content: center;
+     right: 1px;
+
+
+ }
+
+ table.kpp {
+     width: 50%;
+     text-align: left;
+     background-color: none;
+     margin: 0px 0px 0px 0px;
+     justify-content: center;
+     left: -1px;
+
+ }
+
+ .kpp,
+ .kpp2 {
+     border-top: 1px solid black;
+     border-bottom: 1px solid black;
+ }
+
+ #dataTable {
+     width: 100%;
+     table-layout: fixed;
+     border-collapse: collapse;
+     margin: auto;
+     text-align: left;
+
+ }
+
+ #dataTable th,
+ #dataTable td {
+     border: 1px solid black;
+     padding: 4px;
+     word-wrap: break-word;
+     /* Ensure content wraps within cells */
+ }
+
+ #dataTable th {
+     background: none;
+ }
+
+ table {
+     width: 100%;
+     border-collapse: collapse;
+     border: 1px solid black;
+     background: none;
+     justify-content: center;
+     margin: 0 auto;
+ }
+
+ th,
+ td {
+     border-left: 1px solid black;
+     border-right: 1px solid black;
+     padding: 8px;
+     align-items: left;
+ }
+
+ th {
+     border-top: 1px solid black;
+     border-bottom: 1px solid black;
+     background-color: #f2f2f2;
+ }
+
+ tr {
+     border: none;
+ }
+
+ table,
+ th {
+     border: 1px solid black;
+ }
+
+ .description-cell {
+     white-space: pre-wrap;
+    font-weight: bold;
+
+ }
+
+ .taxes {
+     text-align: right;
+     white-space: nowrap;
+ }
+
+ .no-upper-border td {
+     border-top: none !important;
+     border-bottom: none !important;
+ }
+
+ .no-upper-border-for-taxes td {
+     border-top: none !important;
+ }
+
+ .bank-details {
+     width: 100%;
+     border-collapse: collapse;
+     table-layout: fixed;
+ }
+
+ .bank-details th,
+ .bank-details td {
+     border: 1px solid black;
+     padding: 4px;
+     text-align: left;
+     word-wrap: break-word;
+ }
+
+ .bank-details th {
+     background: none;
+ }
+
+ .bank-details td {
+     background: none;
+ }
+
+ .bank-details .declaration {
+     height: 10px;
+     vertical-align: bottom;
+     padding: 4px;
+ }
+
+ .bank-details .signature {
+     width: 30%;
+    padding: 30px;
+     text-align: center;
+     vertical-align: bottom;
+     position: relative;
+ }
+
+
+ .bank-details .signature div {
+     margin-bottom: 10px;
+
+ }
+
+ .bank-details .signature img {
+     width: 50px;
+     height: 30px;
+     margin-bottom: 5px;
+ }
+
+ .bank-details .signature .signatory {
+     position: absolute;
+     bottom: 0;
+     right: 0;
+ }
+
+ #downloadBtn {
+     display: block;
+     width: 200px;
+     height: 50px;
+     margin: 20px auto;
+     background-color: #4CAF50;
+     color: white;
+     border: none;
+     border-radius: 5px;
+     font-size: 18px;
+     font-weight: bold;
+     cursor: pointer;
+     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+     transition: background-color 0.3s ease, transform 0.3s ease;
+ }
+
+ #downloadBtn:hover {
+     background-color: #45a049;
+     transform: translateY(-2px);
+ }
+
+ #downloadBtn:active {
+     transform: translateY(2px);
+ }
+ #downloadPDFBtn {
+     display: block;
+     width: 200px;
+     height: 50px;
+     margin: 20px auto;
+     background-color: #4CAF50;
+     color: white;
+     border: none;
+     border-radius: 5px;
+     font-size: 18px;
+     font-weight: bold;
+     cursor: pointer;
+     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+     transition: background-color 0.3s ease, transform 0.3s ease;
+ }
+
+ #downloadPDFBtn:hover {
+     background-color: #45a049;
+     transform: translateY(-2px);
+ }
+
+ #downloadPDFBtn:active {
+     transform: translateY(2px);
+ }
