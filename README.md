@@ -111,15 +111,9 @@ This README provides detailed instructions on how to set up and use the template
 
 ---
 
-## License
-
-This project is licensed under the MIT License – see the [LICENSE](LICENSE) file for details.
-
----
-
 ## Contact
 
-For any questions or suggestions, feel free to contact me at [Your Email].
+For any questions or suggestions, feel free to contact me at [adepuvishal18@gmail.com].
 
 ---
 
